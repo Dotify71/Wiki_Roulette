@@ -1,11 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki Roulette</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#0e0e0e"/>
+  <meta name="description" content="Spin through random Wikipedia articles from your interests — Mathematics, Philosophy, Technology, and more."/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="WikiRoulette"/>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Wiki Roulette"/>
+  <meta property="og:description" content="Discover random Wikipedia articles from your interests."/>
+  <meta property="og:type" content="website"/>
+
+  <title>Wiki Roulette</title>
+  <link rel="apple-touch-icon" href="icon-192.png"/>
+  <link rel="icon" href="icon-192.png" type="image/png"/>
+  <link rel="manifest" href="manifest.json"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
 </head>
 <body>
-    
+
+  <div class="grain"></div>
+
+  <!-- Install banner (shown when installable) -->
+  <div class="install-banner" id="installBanner">
+    <span class="install-text">Add Wiki Roulette to your home screen</span>
+    <button class="install-btn" id="installBtn">Install</button>
+    <button class="install-dismiss" id="installDismiss">✕</button>
+  </div>
+
+  <button class="settings-btn" id="settingsBtn" aria-label="Settings">⚙</button>
+
+  <!-- Settings Modal -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Your Interests</h2>
+        <button class="modal-close" id="settingsClose">✕</button>
+      </div>
+      <div class="modal-body" id="categoryToggles">
+        <!-- JS injects checkboxes -->
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <p class="eyebrow">Knowledge at random</p>
+    <h1>Wiki<br><em>Roulette</em></h1>
+    <p class="subtitle">Spin the wheel. See where it lands.</p>
+  </header>
+
+  <button class="spin-btn" id="spinBtn">
+    <span class="dice" id="dice">⚄</span>
+    <span id="btnText">Spin the wheel</span>
+  </button>
+
+  <div class="error-msg" id="errorMsg">
+    ⚠ Could not fetch an article. Check your connection and try again.
+  </div>
+
+  <div class="card-wrap" id="cardWrap">
+    <div class="empty" id="emptyState">
+      <div class="empty-icon">📖</div>
+      <p class="empty-text">Press the button above to land on<br>a random article from your interests.</p>
+    </div>
+    <div class="card" id="card" style="display:none;"></div>
+  </div>
+
+  <div class="lists-wrap" id="listsWrap">
+    <div class="history" id="historySection">
+      <p class="list-label">Previous spins</p>
+      <div class="list-items" id="historyList"></div>
+    </div>
+
+    <div class="bookmarks" id="bookmarksSection">
+      <p class="list-label">Library &nbsp;<span>🔖</span></p>
+      <div class="list-items" id="bookmarksList">
+        <p class="empty-list" id="emptyBookmarks">No saved articles yet.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
